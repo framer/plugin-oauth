@@ -1,0 +1,24 @@
+# dependencies
+node_modules/
+.pnp
+.pnp.js
+.yarn
+
+# misc
+.DS_Store
+*.pem
+.wrangler/
+
+# files
+my-plugin
+dev-plugin
+dist
+
+# debug
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# local env files
+.env*.local
+.dev.vars

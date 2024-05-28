@@ -1,0 +1,10 @@
+CLIENT_ID=XXXXX
+CLIENT_SECRET=XXXX
+
+PLUGIN_URI=https://localhost:5173
+REDIRECT_URI=https://localhost:8787/redirect
+
+AUTHORIZE_ENDPOINT=https://accounts.google.com/o/oauth2/v2/auth
+TOKEN_ENDPOINT=https://oauth2.googleapis.com/token
+
+SCOPE=https://www.googleapis.com/auth/userinfo.profile
