@@ -184,7 +184,12 @@ async function handleRequest(request: Request, env: Env) {
     }
 
     const tokens = await refreshResponse.json();
-    return new Response(JSON.stringify(tokens));
+
+    return new Response(JSON.stringify(tokens), {
+      headers: {
+        "Access-Control-Allow-Origin": env.PLUGIN_URI,
+      },
+    });
   }
 
   if (request.method === "GET" && requestUrl.pathname === "/") {
