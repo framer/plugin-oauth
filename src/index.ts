@@ -103,7 +103,7 @@ async function handleRequest(request: Request, env: Env) {
     // Store the tokens temporarily inside a key value store. This will be
     // retrieved when the plugin polls for them.
     const tokens = (await tokenResponse.json()) as unknown;
-    env.keyValueStore.put(`tokens:${readKey}`, JSON.stringify(tokens), {
+    await env.keyValueStore.put(`tokens:${readKey}`, JSON.stringify(tokens), {
       expirationTtl: 300,
     });
 
