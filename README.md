@@ -2,7 +2,7 @@
 
 Example CloudFlare Worker to proxy OAuth 2.0 login requests and communication tokens with a Framer plugin.
 
-See our [Implementing OAuth guide](https://developers.framer.wiki/docs/oauth) on how to set this up.
+See our [Implementing OAuth guide](https://developers.framer.wiki/plugins/docs/oauth) on how to set this up.
 
 ## Setup
 
