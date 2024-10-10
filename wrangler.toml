@@ -6,3 +6,6 @@ compatibility_flags = ["nodejs_compat"]
 kv_namespaces = [
   { binding = "keyValueStore", id = "5f1cbf9a64964ae5be8464cc2882e58c" },
 ]
+
+[vars]
+PLUGIN_PARENT_DOMAIN = "plugins.framercdn.com"
