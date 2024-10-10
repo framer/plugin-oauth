@@ -45,7 +45,6 @@ async function handleRequest(request: Request, env: Env) {
     return new Response(response, {
       headers: {
         "Content-Type": "application/json",
-        "Access-Control-Allow-Origin": env.PLUGIN_URI,
       },
     });
   }
@@ -125,9 +124,6 @@ async function handleRequest(request: Request, env: Env) {
     if (!readKey) {
       return new Response("Missing read key URL param", {
         status: 400,
-        headers: {
-          "Access-Control-Allow-Origin": env.PLUGIN_URI,
-        },
       });
     }
 
@@ -136,7 +132,6 @@ async function handleRequest(request: Request, env: Env) {
     if (!tokens) {
       return new Response(null, {
         status: 404,
-        headers: { "Access-Control-Allow-Origin": env.PLUGIN_URI },
       });
     }
 
@@ -147,7 +142,6 @@ async function handleRequest(request: Request, env: Env) {
     return new Response(tokens, {
       headers: {
         "Content-Type": "application/json",
-        "Access-Control-Allow-Origin": env.PLUGIN_URI,
       },
     });
   }
@@ -158,9 +152,6 @@ async function handleRequest(request: Request, env: Env) {
     if (!refreshToken) {
       return new Response("Missing refresh token URL param", {
         status: 400,
-        headers: {
-          "Access-Control-Allow-Origin": env.PLUGIN_URI,
-        },
       });
     }
 
@@ -178,18 +169,12 @@ async function handleRequest(request: Request, env: Env) {
     });
 
     if (refreshResponse.status !== 200) {
-      return new Response(refreshResponse.statusText, {
-        status: refreshResponse.status,
-      });
+      return new Response(refreshResponse.statusText);
     }
 
     const tokens = await refreshResponse.json();
 
-    return new Response(JSON.stringify(tokens), {
-      headers: {
-        "Access-Control-Allow-Origin": env.PLUGIN_URI,
-      },
-    });
+    return new Response(JSON.stringify(tokens));
   }
 
   if (request.method === "GET" && requestUrl.pathname === "/") {
@@ -198,23 +183,59 @@ async function handleRequest(request: Request, env: Env) {
 
   return new Response("Page not found", {
     status: 404,
-    headers: {
-      "Access-Control-Allow-Origin": env.PLUGIN_URI,
-    },
+  });
+}
+
+function getCORSAllowOriginHeader(request: Request, env: Env) {
+  const origin = request.headers.get("Origin");
+
+  const defaultCORSHeader = `https://${env.PLUGIN_ID}.${env.PLUGIN_PARENT_DOMAIN}`;
+
+  if (!origin) return defaultCORSHeader;
+
+  const originURL = new URL(origin);
+  if (originURL.hostname === "localhost") {
+    return originURL.origin;
+  }
+
+  // Support for versioned plugins
+  const [hostLabel, ...parentDomainLabels] = originURL.hostname.split(".");
+  if (
+    parentDomainLabels.join(".") === env.PLUGIN_PARENT_DOMAIN &&
+    hostLabel.startsWith(env.PLUGIN_ID)
+  ) {
+    return originURL.origin;
+  }
+
+  // Otherwise set the CORS header to non versioned plugin URI always
+  return defaultCORSHeader;
+}
+
+function addCorsHeaders(request: Request, response: Response, env: Env) {
+  const headers = new Headers(response.headers);
+
+  headers.set(
+    "Access-Control-Allow-Origin",
+    getCORSAllowOriginHeader(request, env)
+  );
+
+  return new Response(response.body, {
+    headers: headers,
+    status: response.status,
+    statusText: response.statusText,
   });
 }
 
 export default {
   async fetch(request: Request, env: Env): Promise<Response> {
-    return handleRequest(request, env).catch((error) => {
+    const response = await handleRequest(request, env).catch((error) => {
       const message = error instanceof Error ? error.message : "Unknown";
 
       return new Response(`😔 Internal error: ${message}`, {
         status: 500,
-        headers: {
-          "Access-Control-Allow-Origin": env.PLUGIN_URI,
-        },
       });
     });
+
+    return addCorsHeaders(request, response, env);
   },
 };
