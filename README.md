@@ -10,15 +10,15 @@ See our [Implementing OAuth guide](https://developers.framer.wiki/plugins/docs/o
 
 The following environment variables need to be added via the CloudFlare console or CLI.
 
-| Name               | Details                                                                                                                 |
-| ------------------ | ----------------------------------------------------------------------------------------------------------------------- |
-| CLIENT_ID          | App ID created in the providers developer console                                                                       |
-| CLIENT_SECRET      | App secret key created in the providers developer console. **Do not expose** in source code or send back to the client! |
-| PLUGIN_URI         | Root path of where your plugin is hosted                                                                                |
-| REDIRECT_URI       | Callback path that provider will redirect to after logging in                                                           |
-| AUTHORIZE_ENDPOINT | Provider endpoint path for showing the log in screen                                                                    |
-| TOKEN_ENDPOINT     | Provider endpoint path for fetching and refreshing access tokens                                                        |
-| SCOPE              | Provider permissions separated by a space                                                                               |
+| Name               | Details                                                                                                                                                                                                |
+| ------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| CLIENT_ID          | App ID created in the providers developer console                                                                                                                                                      |
+| CLIENT_SECRET      | App secret key created in the providers developer console. **Do not expose** in source code or send back to the client!                                                                                |
+| PLUGIN_ID          | The Plugin ID environment variable should be set when the Plugin is submitted to the marketplace to ensure correct CORS headers. You can find the Plugin ID in the URL of your marketplace submission. |
+| REDIRECT_URI       | Callback path that provider will redirect to after logging in                                                                                                                                          |
+| AUTHORIZE_ENDPOINT | Provider endpoint path for showing the log in screen                                                                                                                                                   |
+| TOKEN_ENDPOINT     | Provider endpoint path for fetching and refreshing access tokens                                                                                                                                       |
+| SCOPE              | Provider permissions separated by a space                                                                                                                                                              |
 
 To test locally, create a `.dev.vars` file with your own `CLIENT_ID` and `CLIENT_SECRET`.
 
