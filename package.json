@@ -6,6 +6,7 @@
     "deploy": "wrangler deploy",
     "dev": "wrangler dev --https-key-path ./localhost-key.pem --https-cert-path ./localhost.pem --local-protocol https",
     "start": "wrangler dev",
+    "bootstrap": "npx wrangler d1 create oauth-store && npx wrangler d1 execute oauth-store --local --file=./src/schema.sql",
     "test": "vitest",
     "cf-typegen": "wrangler types"
   },

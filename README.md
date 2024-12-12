@@ -28,6 +28,9 @@ To test locally, create a `.dev.vars` file with your own `CLIENT_ID` and `CLIENT
 # Install the dependencies.
 npm install
 
+# Setup D1 database.
+npm run bootstrap
+
 # Run the worker locally.
 npm run dev
 ```
