@@ -3,17 +3,18 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
+    "bootstrap": "npx wrangler d1 create oauth-store && npx wrangler d1 execute oauth-store --local --file=./src/schema.sql",
     "deploy": "wrangler deploy",
-    "dev": "wrangler dev --https-key-path ./localhost-key.pem --https-cert-path ./localhost.pem --local-protocol https",
+    "dev": "wrangler dev --https-key-path ./localhost-key.pem --https-cert-path ./localhost.pem --local-protocol https --port 8787",
     "start": "wrangler dev",
     "test": "vitest",
     "cf-typegen": "wrangler types"
   },
   "devDependencies": {
-    "@cloudflare/vitest-pool-workers": "^0.1.0",
-    "@cloudflare/workers-types": "^4.20240512.0",
-    "typescript": "^5.0.4",
-    "vitest": "1.3.0",
-    "wrangler": "^3.0.0"
+    "@cloudflare/vitest-pool-workers": "^0.5.40",
+    "@cloudflare/workers-types": "^4.20241230.0",
+    "typescript": "^5",
+    "vitest": "^2",
+    "wrangler": "^3"
   }
 }

@@ -1,8 +1,9 @@
+# Set the Plugin ID when your Plugin is submitted to the Marketplace.
+PLUGIN_ID = ""
+
 CLIENT_ID=XXXXX
 CLIENT_SECRET=XXXX
 
-# Set the Plugin ID when your Plugin is submitted to the Marketplace.
-PLUGIN_ID = ""
 REDIRECT_URI=https://localhost:8787/redirect
 
 AUTHORIZE_ENDPOINT=https://accounts.google.com/o/oauth2/v2/auth

@@ -6,6 +6,12 @@ See our [Implementing OAuth guide](https://developers.framer.wiki/plugins/docs/o
 
 ## Setup
 
+### Create a new project
+
+```sh
+npm create cloudflare@latest -- --template framer/plugin-oauth
+```
+
 ### Environment variables
 
 The following environment variables need to be added via the CloudFlare console or CLI.
@@ -27,6 +33,12 @@ To test locally, create a `.dev.vars` file with your own `CLIENT_ID` and `CLIENT
 ```sh
 # Install the dependencies.
 npm install
+
+# Install mkcert (see https://github.com/FiloSottile/mkcert) and create dev certificates.
+mkcert localhost
+
+# Setup D1 database.
+npm run bootstrap
 
 # Run the worker locally.
 npm run dev
