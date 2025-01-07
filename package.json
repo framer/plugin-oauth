@@ -3,8 +3,9 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
+    "bootstrap": "npx wrangler d1 create oauth-store && npx wrangler d1 execute oauth-store --local --file=./src/schema.sql",
     "deploy": "wrangler deploy",
-    "dev": "wrangler dev --https-key-path ./localhost-key.pem --https-cert-path ./localhost.pem --local-protocol https",
+    "dev": "wrangler dev --https-key-path ./localhost-key.pem --https-cert-path ./localhost.pem --local-protocol https --port 8787",
     "start": "wrangler dev",
     "test": "vitest",
     "cf-typegen": "wrangler types"
