@@ -61,7 +61,7 @@ function getCORSAllowOriginHeader(request: Request, env: Env) {
     return originURL.origin;
   }
 
-  // Otherwise set the CORS header to non versioned plugin URI always
+  // Otherwise set the CORS header to non-versioned plugin URI always
   return defaultCORSHeader;
 }
 
