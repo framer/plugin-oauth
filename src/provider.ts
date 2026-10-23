@@ -3,7 +3,7 @@ import * as store from "./store";
 import { generateRandomId } from "./generateRandomId";
 
 /**
- * Generate an authorization URL to login into the provider, and a set of read
+ * Generate an authorization URL to log in to the provider, and a set of read
  * and write keys for retrieving the access token later on.
  */
 export async function authorize(env: Env): Promise<Response> {
@@ -52,7 +52,7 @@ export async function authorize(env: Env): Promise<Response> {
 
 /**
  * Once the user has been authorized via login page, the provider will
- * redirect them back this URL with an access code (not an access token) and
+ * redirect them back to this URL with an access code (not an access token) and
  * the write key we stored in the state param.
  */
 export async function redirect(env: Env, url: URL): Promise<Response> {
